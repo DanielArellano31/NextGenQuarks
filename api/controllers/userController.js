@@ -1,47 +1,31 @@
 import { UserModel } from "../models/userModel.js";
 
-export const registerUser  = async (req,res) =>{
+
+export const registerUser = async (req, res) => {
     try {
-        //validamos que los datos existan
-        
-        const name = req.body.name
-        const email = req.body.email
-        const password = req.body.password
-        const rol = req.body.rol
-        console.log(req.body)
-        //definir que administradores no puedan crear clientes
-        if((req.user?.rol === "administrator" || req.user?.rol === "mechanic")&& rol === "operator"){
-            res.status(400).json({msg:"los administradores ni los mecanicos pueden crear operadores"})
-            return
+        const { name, email, password, rol } = req.body;
+
+        // Validación de datos
+        if (!name || !email || !password || !rol) {
+            res.status(400).json({ msg: "Faltan datos para crear un usuario" });
+            return;
         }
 
-        //validamos que los datos proporcionados esten completos
-
-        if( !name || !email || !password || !rol){
-            res.status(400).json({msg:"Faltam datos para crear un usuario"})
-            return
+        // Validación de rol
+        if (rol === "administrator" && req.user?.rol !== "administrator") {
+            res.status(403).json({ msg: "No tienes permisos para crear un administrador" });
+            return;
         }
-             //validamos que el usuario sea admin si el usuario a crear es admin
-      if (req.user.rol == "administrator" && req.user?.rol != "administrator"){
-        res.status(400).json({msg:"Si quieres crear un admin debes ser uno"})
-        return
+
+        // Creación del usuario
+        const user = await UserModel.create({ name, email, password, rol });
+        res.status(201).json({ msg: "Usuario registrado con éxito", user });
+    } catch (error) {
+        console.error("Error en registerUser:", error);
+        res.status(500).json({ msg: "Hubo un error al crear el usuario" });
     }
-//creamos user apartir de su modelo
-    const user = await UserModel.create({
-        name, 
-        email,
-        password,
-        rol
-    })
+};
 
-    res.status(200).json({msg:"Usuario registrado con exito"})
-    return
-} catch (error) {
-      console.log(error)
-      res.status(500).json({msg:"Hubo un error al crear el usuario"})
-      return
-}
-}
 
 export const logIn = async(req, res)=>{
   try {

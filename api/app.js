@@ -15,6 +15,7 @@ mongoose.connect(process.env.urlbase)
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 
 app.post("/register", registerUser)
