@@ -1,14 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ModeloPred from './modelo';
+import { RegisterUser } from './Register';
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+
+  {
+    path: "/register",
+    element: <RegisterUser />,
+  },
+
+
+
+])
+const user = localStorage.user ? JSON.parse(localStorage.user) : undefined
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ModeloPred />
+    <>
+      {
+        user?.logined === true && (
+          <ModeloPred />
+        )
+      }
+      <RouterProvider router={router} />
+    </>
   </React.StrictMode>
 );
 
