@@ -45,6 +45,15 @@ export const RegisterUser = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3">
+                                    <Form.Label className="register-label">Apellidos:</Form.Label>
+                                    <Form.Control
+                                        className="register-input"
+                                        onChange={onChangeRegister}
+                                        name="lastNames"
+                                        placeholder="Ingresa tu apellido"
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
                                     <Form.Label className="register-label">Correo:</Form.Label>
                                     <Form.Control
                                         className="register-input"

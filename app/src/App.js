@@ -22,7 +22,7 @@ const App = () => {
       const user = res.data.user;
       user.logined = true;
 
-      navigate("/Dashboard");
+      navigate("/modelo");
       alert("¡BIENVENIDO!");
     } catch (error) {
       alert("Incorrecto");

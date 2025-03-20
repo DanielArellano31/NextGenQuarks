@@ -14,3 +14,38 @@
 .contaier{
     background-color: white;
 }
+
+.imagen{
+    display: flex;
+    justify-content: flex-end;
+    width: 50px;
+    margin: 10px;
+    margin-top: 10px;
+
+}
+.navbar{
+    background-color: #393477;
+    display: flex;
+    justify-content:space-between ;
+    justify-content: center;
+    align-items: center;
+}
+.profile{
+    width: 50px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.title{
+    background-color: #393477;
+    display: flex;
+    justify-content: baseline;
+
+}
+p{
+    color: white;
+}
+
+.footer{
+    width: 40%;
+    display: flex;
+}
