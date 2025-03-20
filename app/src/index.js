@@ -12,6 +12,7 @@ import { RegisterUser } from './Register';
 import Navbarrr from './components/navbar';
 import { Navbar } from 'react-bootstrap';
 import { Admin } from './dashboardAdmin';
+import { ReportForm } from './ReportForm'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <Admin />,
+  },
+  {
+    path: "/Form",
+    element: <ReportForm />,
   },
 
 
