@@ -44,7 +44,15 @@ export const RegisterUser = () => {
                                         placeholder="Ingresa tu nombre"
                                     />
                                 </Form.Group>
-                              
+                                <Form.Group className="mb-3">
+                                    <Form.Label className="register-label">Apellidos:</Form.Label>
+                                    <Form.Control
+                                        className="register-input"
+                                        onChange={onChangeRegister}
+                                        name="lastNames"
+                                        placeholder="Ingresa tu apellido"
+                                    />
+                                </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label className="register-label">Correo:</Form.Label>
                                     <Form.Control
@@ -64,6 +72,14 @@ export const RegisterUser = () => {
                                         type="password"
                                         placeholder="Ingresa tu contraseña"
                                     />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Select >
+                                        <option>Rol</option>
+                                        <option name="administrator">Administrador</option>
+                                        <option  name="mechanic">Mecanico</option>
+                                        <option  name="operator">Operador</option>
+                                    </Form.Select>
                                 </Form.Group>
                                 <Button className="register-button" onClick={onSubmit}>
                                     ¡Regístrate!
