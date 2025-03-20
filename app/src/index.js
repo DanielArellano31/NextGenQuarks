@@ -9,7 +9,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ModeloPred from './modelo';
 import { RegisterUser } from './Register';
-
+import Navbarrr from './components/navbar';
+import footerr from './components/footer';
+import { Navbar } from 'react-bootstrap';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,11 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterUser />,
   },
+  {
+    path: "/modelo",
+    element: <ModeloPred />,
+  },  
+  
 
 
 
@@ -35,7 +42,7 @@ root.render(
     <>
       {
         user?.logined === true && (
-          <ModeloPred />
+          <Navbar/>
         )
       }
       <RouterProvider router={router} />

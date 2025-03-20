@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Card, Container, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
-s
 import axios from "axios"
 
 export const RegisterUser = () => {
@@ -45,15 +44,7 @@ export const RegisterUser = () => {
                                         placeholder="Ingresa tu nombre"
                                     />
                                 </Form.Group>
-                                <Form.Group className="mb-3">
-                                    <Form.Label className="register-label">Apellidos:</Form.Label>
-                                    <Form.Control
-                                        className="register-input"
-                                        onChange={onChangeRegister}
-                                        name="lastNames"
-                                        placeholder="Ingresa tu apellido"
-                                    />
-                                </Form.Group>
+                              
                                 <Form.Group className="mb-3">
                                     <Form.Label className="register-label">Correo:</Form.Label>
                                     <Form.Control
