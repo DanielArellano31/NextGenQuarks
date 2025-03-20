@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Card, Container, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
-s
 import axios from "axios"
 
 export const RegisterUser = () => {
@@ -18,7 +17,7 @@ export const RegisterUser = () => {
 
     const onSubmit = async () => {
         try {
-            data.rol = "client";
+            data.rol = "operator";
             await axios.post("http://localhost:4000/register", data);
             navigate("/");
             alert("Registrado con éxito");
@@ -69,8 +68,8 @@ export const RegisterUser = () => {
                                     <Form.Select >
                                         <option>Rol</option>
                                         <option name="administrator">Administrador</option>
-                                        <option  name="mechanic">Mecanico</option>
-                                        <option  name="operator">Operador</option>
+                                        <option name="mechanic">Mecanico</option>
+                                        <option name="operator">Operador</option>
                                     </Form.Select>
                                 </Form.Group>
                                 <Button className="register-button" onClick={onSubmit}>
