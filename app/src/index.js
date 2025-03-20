@@ -10,9 +10,8 @@ import reportWebVitals from './reportWebVitals';
 import ModeloPred from './modelo';
 import { RegisterUser } from './Register';
 import Navbarrr from './components/navbar';
-import footerr from './components/footer';
 import { Navbar } from 'react-bootstrap';
-import { Operators } from './dashboardOperators';
+import { Admin } from './dashboardAdmin';
 
 const router = createBrowserRouter([
   {
@@ -29,8 +28,8 @@ const router = createBrowserRouter([
     element: <ModeloPred />,
   },
   {
-    path: "/operators",
-    element: <Operators />,
+    path: "/admin",
+    element: <Admin />,
   },
 
 
