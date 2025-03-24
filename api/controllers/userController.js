@@ -46,6 +46,20 @@ export const logIn = async(req, res)=>{
   }
 }
 
+
+export const getAllUsers = async (req,res) =>{
+  try {
+    const allUsers = await UserModel.find({rol:"operator"});
+    res.status(200).json({msg:"Datos obtenidos con exito", allUsers})
+    return
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ msg: "Hubo un error al obtener las metricas de la aplicacion" })
+    return
+}
+  }
+
+
 export const test = () =>{
     console.log("Si funciona el controlador")
 }       
