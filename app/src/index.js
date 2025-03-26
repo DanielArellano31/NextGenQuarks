@@ -13,6 +13,8 @@ import Navbarrr from './components/navbar';
 import { Navbar } from 'react-bootstrap';
 import { Admin } from './dashboardAdmin';
 import { ReportForm } from './ReportForm'
+import {MechanicView} from "./dashboardMechanic"
+
 
 const router = createBrowserRouter([
   {
@@ -36,9 +38,10 @@ const router = createBrowserRouter([
     path: "/Form",
     element: <ReportForm />,
   },
-
-
-
+  {
+    path: "/mechanic",
+    element: <MechanicView />
+  }
 
 ])
 const user = localStorage.user ? JSON.parse(localStorage.user) : undefined
