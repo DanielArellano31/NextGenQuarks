@@ -15,14 +15,14 @@ const App = () => {
   };
 
   const onSubmit = async (e) => {
-    e.preventDefault(); // Para evitar el refresco de la página
+    //e.preventDefault(); // Para evitar el refresco de la página
     try {
       data.rol = "operator";
       const res = await axios.post("http://localhost:4000/login", data);
       const user = res.data.user;
       user.logined = true;
 
-      navigate("/modelo");
+      navigate("/mechanic");
       alert("¡BIENVENIDO!");
     } catch (error) {
       alert("Incorrecto");
