@@ -3,6 +3,8 @@ import { Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import logo from "./images/logo.png";
+import footer from "./images/foot.png"
 import "./App.css";
 
 const App = () => {
@@ -10,7 +12,6 @@ const App = () => {
   const navigate = useNavigate();
 
   const onChange = (e) => {
-    e.preventDefault();
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
@@ -25,66 +26,72 @@ const App = () => {
       navigate("/modelo");
       alert("¡BIENVENIDO!");
     } catch (error) {
-      alert("Incorrecto");
+      alert("Datos incorrectos, intenta nuevamente.");
     }
   };
 
   return (
     <Container className="container">
       <Card className="form">
-        <form >
-          <div className="flex-column">
-            <label>Email</label>
-          </div>
-          <div className="inputForm">
+        {/* Logo */}
+        <div className="logo-container">
+          <img src={logo} alt="Yovoy Fixed" className="logo" />
+        </div>
+
+
+        <h2 className="title">Inicio de sesión</h2>
+        <p className="subtitle">Bienvenido a YOVOY FIXED</p>
+
+        <form onSubmit={onSubmit}>
+          {/* Input Email */}
+          <div className="input-container">
+            <label>Correo electrónico</label>
             <input
               type="email"
               name="email"
-              placeholder="Enter your Email"
+              placeholder="Correo electrónico"
               className="input"
               value={data.email || ""}
               onChange={onChange}
+              required
             />
           </div>
 
-          <div className="flex-column">
-            <label>Password</label>
-          </div>
-          <div className="inputForm">
+          {/* Input Contraseña */}
+          <div className="input-container">
+            <label>Contraseña</label>
             <input
               type="password"
               name="password"
-              placeholder="Enter your Password"
+              placeholder="Contraseña"
               className="input"
               value={data.password || ""}
               onChange={onChange}
+              required
             />
           </div>
 
-          <div className="flex-row">
-            <div>
-              <input
-                type="checkbox"
-                name="remember"
-                checked={data.remember || false}
-                onChange={onChange}
-              />
-              <label>Remember me</label>
-            </div>
-            <span className="span">Forgot password?</span>
-          </div>
-          <p className="text-center mb-1">
-            ¿No tienes cuenta?{" "}
-            <button
-              variant="link"
-              onClick={() => navigate("/Register")}
-            >
-              Regístrate
-            </button>
-          </p>
 
-          <button type="submit" className="button-submit" onClick={() => onSubmit()}>Sign In</button>
+
+
+          {/* Botón Iniciar Sesión */}
+          <button type="submit" className="button-submit">
+            Iniciar Sesión
+          </button>
+
+          {/* Registro */}
+          <p className="register-text">
+            ¿Aún no te registras?{" "}
+            <span className="link" onClick={() => navigate("/Register")}>
+              Crea tu cuenta
+            </span>
+          </p>
         </form>
+
+        <footer className="footer">
+          <img src={footer} alt="Footer Image" className="footer-image" />
+        </footer>
+
       </Card>
     </Container>
   );
