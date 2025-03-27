@@ -6,7 +6,7 @@ import yovoy from "../images/imagenyovoy.png"
 import { Card, Image } from "react-bootstrap";
 
 
-function Navbarrr() {
+ export  const Navbarrr = ()=> {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -36,5 +36,3 @@ function Navbarrr() {
 
   );
 }
-
-export default Navbarrr;

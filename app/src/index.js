@@ -7,10 +7,9 @@ import {
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ModeloPred from './modelo';
+import {ModeloPred }from './modelo';
 import { RegisterUser } from './Register';
-import Navbarrr from './components/navbar';
-import { Navbar } from 'react-bootstrap';
+import {Navbarrr} from './components/navbar';
 import { Admin } from './dashboardAdmin';
 import { ReportForm } from './ReportForm'
 import {MechanicView} from "./dashboardMechanic"
@@ -54,7 +53,7 @@ root.render(
     <>
       {
         user?.logined === true && (
-          <Navbar />
+          <Navbarrr />
         )
       }
       <RouterProvider router={router} />

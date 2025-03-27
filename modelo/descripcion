@@ -1,0 +1,188 @@
+
+---
+
+### **1. Importación de las librerías**
+
+```python
+import tensorflow as tf
+from tensorflow.keras import Model
+from tensorflow.keras.layers import Input, Dense
+import numpy as np
+```
+
+**Normal (técnico):**
+- `tensorflow`: Es una biblioteca de machine learning que nos permite construir y entrenar modelos de redes neuronales.
+- `Model`: Representa la arquitectura de la red neuronal que crearemos.
+- `Input`: Define la forma de los datos de entrada para el modelo.
+- `Dense`: Es una capa donde todas las neuronas están conectadas entre sí.
+- `numpy`: Biblioteca para manejar matrices de datos numéricos.
+
+**Para alguien nuevo:**
+- Piensa en `tensorflow` como una herramienta para construir un cerebro artificial que aprende a tomar decisiones. Es como armar un robot que sabe cuándo cambiar las balatas.
+- `numpy` es como Excel, pero para matemáticas avanzadas: organiza y maneja tus datos en tablas grandes.
+
+---
+
+### **2. Definir las características de entrada**
+
+```python
+input_dim = 4  # Número de características de entrada
+input_layer = Input(shape=(input_dim,))
+```
+
+**Normal (técnico):**
+- `input_dim` define cuántas características tendrán nuestros datos (por ejemplo, kilometraje, meses sin mantenimiento).
+- `Input(shape=(input_dim,))` establece que el modelo espera recibir datos con esa forma.
+
+**Para alguien nuevo:**
+- `input_dim` significa cuántas cosas sobre un vehículo estamos observando (kilometraje, temperatura, etc.).
+- `Input` le dice al cerebro artificial cuántas columnas tendrá la tabla que le daremos para aprender.
+
+---
+
+### **3. Crear una capa oculta compartida**
+
+```python
+hidden_layer = Dense(128, activation='relu')(input_layer)
+```
+
+**Normal (técnico):**
+- `Dense(128, activation='relu')` crea una capa de 128 neuronas completamente conectadas.
+- La función de activación `relu` (Rectified Linear Unit) introduce no linealidad y mejora el aprendizaje.
+
+**Para alguien nuevo:**
+- Aquí estamos poniendo "neuronas" en el cerebro del modelo. Estas neuronas son como pequeños interruptores que analizan los datos y deciden qué patrones son importantes.
+
+---
+
+### **4. Crear salidas para cada componente**
+
+```python
+output_balatas = Dense(1, activation='sigmoid', name='balatas')(hidden_layer)
+output_aceite = Dense(1, activation='sigmoid', name='aceite')(hidden_layer)
+output_bujias = Dense(1, activation='sigmoid', name='bujias')(hidden_layer)
+output_suspension = Dense(1, activation='sigmoid', name='suspension')(hidden_layer)
+```
+
+**Normal (técnico):**
+- Cada línea define una salida específica para un componente (balatas, aceite, etc.).
+- `Dense(1, activation='sigmoid')` devuelve un valor entre 0 y 1, ideal para problemas binarios (¿cambiar o no cambiar?).
+- `name` asigna nombres únicos a cada salida.
+
+**Para alguien nuevo:**
+- Estas son las respuestas del cerebro artificial: una salida para balatas, otra para aceite, etc.
+- Cada salida dirá "sí" (1) o "no" (0) dependiendo de si cree que ese componente necesita ser cambiado.
+
+---
+
+### **5. Construir y compilar el modelo**
+
+```python
+model = Model(inputs=input_layer, outputs=[output_balatas, output_aceite, output_bujias, output_suspension])
+model.compile(
+    optimizer='adam',
+    loss={
+        'balatas': 'binary_crossentropy',
+        'aceite': 'binary_crossentropy',
+        'bujias': 'binary_crossentropy',
+        'suspension': 'binary_crossentropy'
+    },
+    metrics={
+        'balatas': ['accuracy'],
+        'aceite': ['accuracy'],
+        'bujias': ['accuracy'],
+        'suspension': ['accuracy']
+    }
+)
+```
+
+**Normal (técnico):**
+- `Model(inputs=input_layer, outputs=[...])`: Combina las entradas y las salidas en un modelo.
+- `compile`: Configura cómo el modelo aprende.
+  - `optimizer='adam'`: Ajusta los pesos del modelo automáticamente durante el entrenamiento.
+  - `loss='binary_crossentropy'`: Mide qué tan bien está funcionando el modelo en problemas binarios.
+  - `metrics=['accuracy']`: Calcula la precisión para evaluar el rendimiento.
+
+**Para alguien nuevo:**
+- Aquí ensamblamos todas las piezas del cerebro artificial (entradas, capas ocultas y salidas).
+- Luego lo configuramos para que aprenda de los datos, como si le enseñáramos a un aprendiz a identificar cuándo cambiar partes del vehículo.
+
+---
+
+### **6. Entrenamiento del modelo**
+
+```python
+history = model.fit(
+    X_train,
+    {
+        'balatas': y_balatas_train,
+        'aceite': y_aceite_train,
+        'bujias': y_bujias_train,
+        'suspension': y_suspension_train
+    },
+    epochs=50,
+    batch_size=32,
+    validation_data=(
+        X_val,
+        {
+            'balatas': y_balatas_val,
+            'aceite': y_aceite_val,
+            'bujias': y_bujias_val,
+            'suspension': y_suspension_val
+        }
+    )
+)
+```
+
+**Normal (técnico):**
+- `fit`: Entrena el modelo con datos de entrada (`X_train`) y etiquetas correspondientes (`y_*_train`).
+  - `epochs=50`: El modelo revisará todos los datos 50 veces.
+  - `batch_size=32`: Procesa los datos en pequeños grupos de 32 ejemplos.
+  - `validation_data`: Proporciona datos separados para validar el modelo durante el entrenamiento.
+
+**Para alguien nuevo:**
+- Esta parte es como entrenar a alguien para que reconozca patrones. Le damos ejemplos de vehículos y le decimos si los componentes necesitan cambio. Repetimos este proceso 50 veces hasta que "aprenda".
+
+---
+
+### **7. Evaluación del modelo**
+
+```python
+evaluation = model.evaluate(
+    X_test,
+    {
+        'balatas': y_balatas_test,
+        'aceite': y_aceite_test,
+        'bujias': y_bujias_test,
+        'suspension': y_suspension_test
+    }
+)
+```
+
+**Normal (técnico):**
+- `evaluate`: Mide el rendimiento del modelo con datos de prueba no vistos (`X_test` y `y_test`).
+
+**Para alguien nuevo:**
+- Probamos al aprendiz con datos nuevos que nunca ha visto para verificar qué tan bien puede predecir cuándo cambiar componentes.
+
+---
+
+### **8. Predicción en datos nuevos**
+
+```python
+predicciones = model.predict(nuevos_datos)
+print("Predicciones para balatas:", predicciones[0])
+print("Predicciones para aceite:", predicciones[1])
+print("Predicciones para bujías:", predicciones[2])
+print("Predicciones para suspensión:", predicciones[3])
+```
+
+**Normal (técnico):**
+- `predict`: Utiliza el modelo entrenado para predecir resultados en datos nuevos.
+- `nuevos_datos`: Datos de entrada no usados durante el entrenamiento.
+
+**Para alguien nuevo:**
+- Ahora el cerebro artificial nos dice qué hacer con vehículos nuevos. Nos da respuestas como "sí" (1) o "no" (0) para cada componente.
+
+---
+
