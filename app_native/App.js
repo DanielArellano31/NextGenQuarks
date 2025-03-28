@@ -22,10 +22,11 @@ const App = () => {
   const onSubmit = async () => {
     try {
       data.rol = "operator";
-      const res = await axios.post("https://zv6c2klc-4000.usw3.devtunnels.ms/login", data);
+      const res = await axios.post("/login", data);
+      console.log(res)
       const user = res.data.user;
       user.logined = true;
-      navigation("Home")
+      navigation.navigate("Home")
 
       Alert.alert("¡BIENVENIDO!");
     } catch (error) {
@@ -34,64 +35,64 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}> 
+    <SafeAreaView style={styles.container}>
 
-    <View style={styles.container}>
-      {/* Logo */}
-      <View style={styles.logoContainer}>
-        <Image source={require("./images/logo.png")} style={styles.logo} />
-      </View>
+      <View style={styles.container}>
+        {/* Logo */}
+        <View style={styles.logoContainer}>
+          <Image source={require("./images/logo.png")} style={styles.logo} />
+        </View>
 
-      <Text style={styles.title}>Inicio de sesión</Text>
-      <Text style={styles.subtitle}>Bienvenido a YOVOY FIXED</Text>
+        <Text style={styles.title}>Inicio de sesión</Text>
+        <Text style={styles.subtitle}>Bienvenido a YOVOY FIXED</Text>
 
-      {/* Email Input */}
-      <View style={styles.inputContainer}>
-        <Text>Correo electrónico</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Correo electrónico"
-          onChangeText={(value) => onChange("email", value)}
-          value={data.email || ""}
-          keyboardType="email-address"
-        />
-      </View>
+        {/* Email Input */}
+        <View style={styles.inputContainer}>
+          <Text>Correo electrónico</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Correo electrónico"
+            onChangeText={(value) => onChange("email", value)}
+            value={data.email || ""}
+            keyboardType="email-address"
+          />
+        </View>
 
-      {/* Password Input */}
-      <View style={styles.inputContainer}>
-        <Text>Contraseña</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          onChangeText={(value) => onChange("password", value)}
-          value={data.password || ""}
-          secureTextEntry
-        />
-      </View>
+        {/* Password Input */}
+        <View style={styles.inputContainer}>
+          <Text>Contraseña</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Contraseña"
+            onChangeText={(value) => onChange("password", value)}
+            value={data.password || ""}
+            secureTextEntry
+          />
+        </View>
 
-      {/* Submit Button */}
-      <TouchableOpacity style={styles.button} onPress={onSubmit}>
-        <Text style={styles.buttonText}>Iniciar Sesión</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate("layout")}>
-        <Text style={styles.buttonText}>boton</Text>
-      </TouchableOpacity>
+        {/* Submit Button */}
+        <TouchableOpacity style={styles.button} onPress={onSubmit}>
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("DasboardAdmin")}>
+          <Text style={styles.buttonText}>boton</Text>
+        </TouchableOpacity>
 
-      {/* Register Link */}
-      <Text style={styles.registerText}>
-        ¿Aún no te registras?{"/register"}
-        <Text
-          style={styles.link}
-          onPress={()=> navigation.navigate("Register")}
-        >
-          Crea tu cuenta
+        {/* Register Link */}
+        <Text style={styles.registerText}>
+          ¿Aún no te registras?{"/register"}
+          <Text
+            style={styles.link}
+            onPress={() => navigation.navigate("Register")}
+          >
+            Crea tu cuenta
+          </Text>
         </Text>
-      </Text>
 
-      <View style={styles.footer}>
-        <Image source={require("./images/foot.png")} style={styles.footerImage} />
+        <View style={styles.footer}>
+          <Image source={require("./images/foot.png")} style={styles.footerImage} />
+        </View>
       </View>
-    </View>
     </SafeAreaView>
   );
 };
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#fff",
-    
+
   },
   logoContainer: {
     alignItems: "center",
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 500,
     width: 400,
-    margin:100
+    margin: 100
   },
 });
 

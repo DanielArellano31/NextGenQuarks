@@ -1,18 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Layout = ({ children, navigation }) => {
+const Layout = ({ children }) => {
+
     return (
         <View style={styles.container}>
             {/* Navbar */}
             <View style={styles.navbar}>
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.navItem}>Inicio</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.navItem}>Perfil</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.navItem}>Configuración</Text>
                 </TouchableOpacity>
             </View>
@@ -31,11 +32,11 @@ const Layout = ({ children, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#007bff',
     },
     navbar: {
         height: 50,
-        backgroundColor: '#007BFF',
+        backgroundColor: '#333c87',
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     },
     footer: {
         height: 40,
-        backgroundColor: '#007BFF',
+        backgroundColor: '#333c87',
         justifyContent: 'center',
         alignItems: 'center',
     },
