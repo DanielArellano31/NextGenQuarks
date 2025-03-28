@@ -7,12 +7,13 @@ import {
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {ModeloPred }from './modelo';
+import { ModeloPred } from './modelo';
 import { RegisterUser } from './Register';
-import {Navbarrr} from './components/navbar';
+import { Navbarrr } from './components/navbar';
 import { Admin } from './dashboardAdmin';
 import { ReportForm } from './ReportForm'
-import {MechanicView} from "./dashboardMechanic"
+import { MechanicView } from "./dashboardMechanic"
+import { OperatorView } from "./dashboardOperator"
 
 
 const router = createBrowserRouter([
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/mechanic",
     element: <MechanicView />
+  },
+  {
+    path: "/operator",
+    element: <OperatorView />
   }
 
 ])

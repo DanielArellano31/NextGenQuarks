@@ -1,16 +1,11 @@
-import React, { useState } from "react";
-import { Table, Container, Form, Card } from "react-bootstrap";
-import "./MechanicView.css";
+// MechanicView.jsx
+import React, { useState, useEffect } from "react";
+import { Table, Container, Form, Card, Button } from "react-bootstrap";
 
 export const MechanicView = () => {
-    const [unitNumber, setUnitNumber] = useState(""); // Estado para el número de unidad
-    const [observations, setObservations] = useState({}); // Estado para observaciones dinámicas en la tabla
-    const [statuses, setStatuses] = useState({}); // Estado para los menús desplegables
-
-    const [frontStatuses, setFrontStatuses] = useState({});
-    const [rearStatuses, setRearStatuses] = useState({});
-
-    const [tireStatuses, setTireStatuses] = useState({}); // Estado para la tabla de llantas
+    const [statuses, setStatuses] = useState({});
+    const [observations, setObservations] = useState({});
+    const [unitNumber, setUnitNumber] = useState("")
 
     const operations = [
         "LIMPIAPARABRISAS",
@@ -49,42 +44,25 @@ export const MechanicView = () => {
         "Otros (Especificar)",
     ];
 
-    const rows = [
-        "Pastillas/Zapata",
-        "Disco/Tambor",
-    ];
+    useEffect(() => {
+        const savedData = JSON.parse(localStorage.getItem("mechanicData")) || {};
+        setUnitNumber(savedData.unitNumber || "");
+        setStatuses(savedData.statuses || {});
+        setObservations(savedData.observations || {});
+    }, []);
 
-    const tires = [
-        { position: "Frontal Izquierdo", brand: "Kumho 205/55 R16" },
-        { position: "Frontal Derecho", brand: "Kumho 205/55 R16" },
-        { position: "Trasero Izquierdo", brand: "Kumho 205/55 R16" },
-        { position: "Trasero Derecho", brand: "Kumho 205/55 R16" },
-        { position: "Llanta de Repuesto", brand: "cst 125/80 R15" },
-    ];
-
-    const handleObservationsChange = (index, value) => {
-        setObservations({ ...observations, [index]: value });
+    const handleSaveData = () => {
+        const data = {
+            unitNumber,
+            statuses,
+            observations,
+        };
+        localStorage.setItem("mechanicData", JSON.stringify(data));
     };
 
-    const handleStatusChange = (index, value) => {
-        setStatuses({ ...statuses, [index]: value });
-    };
-
-    const handleFrontStatusChange = (index, value) => {
-        setFrontStatuses({ ...frontStatuses, [index]: value });
-    };
-
-    const handleRearStatusChange = (index, value) => {
-        setRearStatuses({ ...rearStatuses, [index]: value });
-    };
-
-    const handleTireStatusChange = (rowIndex, columnIndex, value) => {
-        const rowStatuses = tireStatuses[rowIndex] || {};
-        rowStatuses[columnIndex] = value;
-        setTireStatuses({ ...tireStatuses, [rowIndex]: rowStatuses });
-    };
 
     return (
+
         <Container className="page-content">
             {/* Título fijo */}
             <h2 className="fixed-title">Vista Mecánico</h2>
@@ -100,10 +78,8 @@ export const MechanicView = () => {
                     style={{ maxWidth: "200px", margin: "0 auto" }}
                 />
             </Form.Group>
-
-            <Card className="cardF">
-                {/* Primera tabla: Vista Mecánico */}
-                <Table striped bordered hover className="table-spacing">
+            <Card>
+                <Table striped bordered>
                     <thead>
                         <tr>
                             <th>Estado</th>
@@ -117,9 +93,7 @@ export const MechanicView = () => {
                                 <td>
                                     <Form.Select
                                         value={statuses[index] || ""}
-                                        onChange={(e) =>
-                                            handleStatusChange(index, e.target.value)
-                                        }
+                                        onChange={(e) => setStatuses({ ...statuses, [index]: e.target.value })}
                                     >
                                         <option value="">Seleccionar</option>
                                         <option value="Urgente">Urgente</option>
@@ -132,121 +106,14 @@ export const MechanicView = () => {
                                     <Form.Control
                                         type="text"
                                         value={observations[index] || ""}
-                                        onChange={(e) =>
-                                            handleObservationsChange(index, e.target.value)
-                                        }
-                                        placeholder="Ingresa las observaciones"
+                                        onChange={(e) => setObservations({ ...observations, [index]: e.target.value })}
                                     />
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </Table>
-                {/* Segunda tabla: Condición de Frenos */}
-                <h3 style={{ textAlign: "center", marginTop: "10px" }}>Condición de Frenos</h3>
-                <Table striped bordered hover className="table-spacing">
-                    <thead>
-                        <tr>
-                            <th>Delantero</th>
-                            <th>Estado</th>
-                            <th>Trasero</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rows.map((row, index) => (
-                            <tr key={index}>
-                                <td>{row}</td>
-                                <td>
-                                    <Form.Select
-                                        value={frontStatuses[index] || ""}
-                                        onChange={(e) =>
-                                            handleFrontStatusChange(index, e.target.value)
-                                        }
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        <option value="Urgente">Urgente</option>
-                                        <option value="Recomendado">Recomendado</option>
-                                        <option value="Bien">Bien</option>
-                                    </Form.Select>
-                                </td>
-                                <td>{row}</td>
-                                <td>
-                                    <Form.Select
-                                        value={rearStatuses[index] || ""}
-                                        onChange={(e) =>
-                                            handleRearStatusChange(index, e.target.value)
-                                        }
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        <option value="Urgente">Urgente</option>
-                                        <option value="Recomendado">Recomendado</option>
-                                        <option value="Bien">Bien</option>
-                                    </Form.Select>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                <h3 style={{ textAlign: "center", marginTop: "10px" }}>Condición de Llantas</h3>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Llanta</th>
-                            <th>Marca y Tamaño</th>
-                            <th>Exterior</th>
-                            <th>Central</th>
-                            <th>Interior</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tires.map((tire, rowIndex) => (
-                            <tr key={rowIndex}>
-                                <td>{tire.position}</td>
-                                <td>{tire.brand}</td>
-                                <td>
-                                    <Form.Select
-                                        value={tireStatuses[rowIndex]?.[0] || ""}
-                                        onChange={(e) =>
-                                            handleTireStatusChange(rowIndex, 0, e.target.value)
-                                        }
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        <option value="Urgente">Urgente</option>
-                                        <option value="Recomendado">Recomendado</option>
-                                        <option value="Bien">Bien</option>
-                                    </Form.Select>
-                                </td>
-                                <td>
-                                    <Form.Select
-                                        value={tireStatuses[rowIndex]?.[1] || ""}
-                                        onChange={(e) =>
-                                            handleTireStatusChange(rowIndex, 1, e.target.value)
-                                        }
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        <option value="Urgente">Urgente</option>
-                                        <option value="Recomendado">Recomendado</option>
-                                        <option value="Bien">Bien</option>
-                                    </Form.Select>
-                                </td>
-                                <td>
-                                    <Form.Select
-                                        value={tireStatuses[rowIndex]?.[2] || ""}
-                                        onChange={(e) =>
-                                            handleTireStatusChange(rowIndex, 2, e.target.value)
-                                        }
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        <option value="Urgente">Urgente</option>
-                                        <option value="Recomendado">Recomendado</option>
-                                        <option value="Bien">Bien</option>
-                                    </Form.Select>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
+                <Button onClick={handleSaveData}>Guardar</Button>
             </Card>
         </Container>
     );
