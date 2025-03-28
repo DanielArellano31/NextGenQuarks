@@ -18,7 +18,7 @@ export const RegisterUser = () => {
     const onSubmit = async () => {
         try {
             data.rol = "operator";
-            await axios.post("http://localhost:4000/register", data);
+            await axios.post("https://zv6c2klc-4000.usw3.devtunnels.ms/register", data);
             navigate("/");
             alert("Registrado con éxito");
         } catch (error) {
