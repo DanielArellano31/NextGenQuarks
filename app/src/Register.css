@@ -1,0 +1,89 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+  }
+  
+  .register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 10px; /* Espacio interno para dispositivos móviles */
+  }
+  
+  .register-container {
+    width: 100%;
+    max-width: 360px; /* Ajusta el ancho para una mejor visualización en móviles */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .register-image-section {
+    display: none; /* Oculta la sección de imágenes para ahorrar espacio en móviles */
+  }
+  
+  .register-form-section {
+    width: 100%;
+  }
+  
+  .register-card {
+    border: none;
+    width: 100%;
+  }
+  
+  .register-title {
+    font-size: 20px; /* Tamaño ajustado para dispositivos móviles */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .register-label {
+    font-size: 14px; /* Fuente más pequeña para optimización móvil */
+  }
+  
+  .register-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  }
+  
+  .register-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff4081;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .register-button:hover {
+    background-color: #e60073;
+  }
+  
+  .register-link {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .register-link button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .register-link button:hover {
+    text-decoration: underline;
+  }
