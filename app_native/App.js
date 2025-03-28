@@ -1,20 +1,151 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Alert,
+} from "react-native";
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
-export default function App() {
+const App = () => {
+  const [data, setData] = useState({});
+  const onChange = (name, value) => {
+    setData({ ...data, [name]: value });
+  };
+
+  const onSubmit = async () => {
+    try {
+      data.rol = "operator";
+      const res = await axios.post("https://zv6c2klc-4000.usw3.devtunnels.ms/login", data);
+      const user = res.data.user;
+      user.logined = true;
+
+      Alert.alert("¡BIENVENIDO!");
+    } catch (error) {
+      Alert.alert("Datos incorrectos, intenta nuevamente.");
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {/* Logo */}
+      <View style={styles.logoContainer}>
+        <Image source={require("./images/logo.png")} style={styles.logo} />
+      </View>
+
+      <Text style={styles.title}>Inicio de sesión</Text>
+      <Text style={styles.subtitle}>Bienvenido a YOVOY FIXED</Text>
+
+      {/* Email Input */}
+      <View style={styles.inputContainer}>
+        <Text>Correo electrónico</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Correo electrónico"
+          onChangeText={(value) => onChange("email", value)}
+          value={data.email || ""}
+          keyboardType="email-address"
+        />
+      </View>
+
+      {/* Password Input */}
+      <View style={styles.inputContainer}>
+        <Text>Contraseña</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Contraseña"
+          onChangeText={(value) => onChange("password", value)}
+          value={data.password || ""}
+          secureTextEntry
+        />
+      </View>
+
+      {/* Submit Button */}
+      <TouchableOpacity style={styles.button} onPress={onSubmit}>
+        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+      </TouchableOpacity>
+
+      {/* Register Link */}
+      <Text style={styles.registerText}>
+        ¿Aún no te registras?{" "}
+        <Text
+          style={styles.link}
+        >
+          Crea tu cuenta
+        </Text>
+      </Text>
+
+      <View style={styles.footer}>
+        <Image source={require("./images/foot.png")} style={styles.footerImage} />
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: "#fff",
+  },
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  inputContainer: {
+    marginBottom: 15,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    borderRadius: 5,
+  },
+  button: {
+    backgroundColor: "#007BFF",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  registerText: {
+    textAlign: "center",
+    marginVertical: 10,
+  },
+  link: {
+    color: "#007BFF",
+    fontWeight: "bold",
+  },
+  footer: {
+    alignItems: "center",
+    marginTop: 20,
+  },
+  footerImage: {
+    width: "100%",
+    height: 50,
   },
 });
+
+export default App;
