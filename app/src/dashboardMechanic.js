@@ -1,10 +1,12 @@
 // MechanicView.jsx
 import React, { useState, useEffect } from "react";
 import { Table, Container, Form, Card, Button } from "react-bootstrap";
+import "./mechanic.css"
 
 export const MechanicView = () => {
     const [statuses, setStatuses] = useState({});
     const [observations, setObservations] = useState({});
+    const [sNumber, setSNumber] = useState("")
     const [unitNumber, setUnitNumber] = useState("")
 
     const operations = [
@@ -49,12 +51,14 @@ export const MechanicView = () => {
         setUnitNumber(savedData.unitNumber || "");
         setStatuses(savedData.statuses || {});
         setObservations(savedData.observations || {});
+        setSNumber(savedData.sNumber || "")
     }, []);
 
     const handleSaveData = () => {
         const data = {
             unitNumber,
             statuses,
+            sNumber,
             observations,
         };
         localStorage.setItem("mechanicData", JSON.stringify(data));
@@ -64,11 +68,9 @@ export const MechanicView = () => {
     return (
 
         <Container className="page-content">
-            {/* Título fijo */}
             <h2 className="fixed-title">Vista Mecánico</h2>
 
-            {/* Entrada numérica para el número de unidad */}
-            <Form.Group style={{ marginBottom: "20px", textAlign: "center" }}>
+            <Form.Group >
                 <Form.Label>Número de Unidad</Form.Label>
                 <Form.Control
                     type="number"
@@ -78,12 +80,13 @@ export const MechanicView = () => {
                     style={{ maxWidth: "200px", margin: "0 auto" }}
                 />
             </Form.Group>
-            <Card>
-                <Table striped bordered>
+            <Card className="card-table">
+                <Table className="table" striped bordered>
                     <thead>
                         <tr>
                             <th>Estado</th>
                             <th>Operación</th>
+                            <th>Nº de serie</th>
                             <th>Observaciones</th>
                         </tr>
                     </thead>
@@ -91,7 +94,7 @@ export const MechanicView = () => {
                         {operations.map((operation, index) => (
                             <tr key={index}>
                                 <td>
-                                    <Form.Select
+                                    <Form.Select className="status"
                                         value={statuses[index] || ""}
                                         onChange={(e) => setStatuses({ ...statuses, [index]: e.target.value })}
                                     >
@@ -104,6 +107,16 @@ export const MechanicView = () => {
                                 <td>{operation}</td>
                                 <td>
                                     <Form.Control
+                                        type="number"
+                                        value={sNumber[index] || ""}
+                                        onChange={(e) => setSNumber({ ...sNumber, [index]: e.target.value })}
+                                        placeholder="De ser necesario"
+                                    />
+
+
+                                </td>
+                                <td>
+                                    <Form.Control className="observations"
                                         type="text"
                                         value={observations[index] || ""}
                                         onChange={(e) => setObservations({ ...observations, [index]: e.target.value })}
