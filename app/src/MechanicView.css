@@ -1,44 +1,36 @@
-/* Clase para el título */
-.fixed-title {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    background-color: white;
-    padding: 10px 10px;
-    z-index: 1000;
-    border-bottom: 1px solid #ccc;
+.page-content {
+    padding: 20px;
+    background-color: #fff;
 }
 
-/* Clase para el contenido */
-.page-content {
-    margin-top: 60px;
-    /* Asegura espacio debajo del título */
-    padding: 20px;
-    /* Espaciado interno */
-    overflow-y: auto;
-    /* Habilita el scroll vertical */
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .cardF {
-    margin: 40px; /* Margen uniforme en todos los lados */
-    max-height: 800px; /* Altura máxima del card */
-    max-width: 100%; /* Asegura que no se desborde horizontalmente */
-    border: 1px solid #ddd; /* Opcional: añade un borde para mejor visualización */
-    padding: 15px; /* Espaciado interno para que el contenido no toque los bordes */
-    background-color: #fff; /* Fondo blanco para que resalte */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto elegante */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Clase para la tabla */
 .table-spacing {
-    margin-top: 40px;
-    /* Espacio superior de la tabla */
-    margin-bottom: 40px;
-    /* Espacio inferior de la tabla */
-    max-width: 100%;
-    /* Asegura que la tabla no se desborde horizontalmente */
+    margin-top: 10px;
+}
 
+.icon-urgent {
+    color: red;
+    margin-right: 5px;
+}
+
+.icon-recommended {
+    color: orange;
+    margin-right: 5px;
+}
+
+.icon-good {
+    color: green;
+    margin-right: 5px;
 }

@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Button, Card, Container, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
+import "./Register.css";
+
+
 
 export const RegisterUser = () => {
     const [data, setData] = useState({});

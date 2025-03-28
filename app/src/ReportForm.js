@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import axios from "axios";
+import "./ReportForm.css";
 
 export const ReportForm = () => {
     const [reportData, setReportData] = useState({
