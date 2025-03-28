@@ -1,0 +1,71 @@
+.admin-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+  }
+  
+  .admin-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .admin-table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .admin-table-header {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .admin-table-row:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .status-pending {
+    color: #ff9800;
+    font-weight: bold;
+  }
+  
+  .status-approved {
+    color: #28a745;
+    font-weight: bold;
+  }
+  
+  .btn-authorize {
+    margin-right: 5px;
+    background-color: #d321d9;
+    border: none;
+  }
+  
+  .btn-reject {
+    margin-right: 5px;
+    background-color: #eeee31;
+    border: none;
+  }
+  
+  .btn-read {
+    background-color: #3d78ab;
+    border: none;
+  }
+  
+  .btn-approved {
+    background-color: #d222c1;
+    border: none;
+  }
+  
+  .btn-delete {
+    background-color: #dc3545;
+    border: none;
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
