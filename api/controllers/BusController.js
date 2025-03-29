@@ -19,13 +19,18 @@ export const CreateBus = async(req,res)=>{
     }
 }
 
-export const getReportsByBus = async(req,res)=>{
+
+export const getReportsByBus = async (req, res) => {
     try {
-        const allBuses = await ReportModel.find({});
-        res.status(200).json({msg:"Datos obtenidos con exito", allBuses})
-        return
+        const { busId } = req.params;
+        const busReports = await ReportModel.find({ busId });
+
+        if (!busReports || busReports.length === 0) {
+            return res.status(400).json({ msg: "No se han encontrado reportes de este autobus" });
+        }
+
+        res.status(200).json({ msg: "Datos obtenidos con éxito", busReports });
     } catch (error) {
-        console-log("Error en getReportsByBus", error)
-        res.status(500).json({msg:"Hubo un error al obtener las metricas"})
+        res.status(500).json({ msg: "Hubo un error al obtener los reportes" });
     }
-}
+};

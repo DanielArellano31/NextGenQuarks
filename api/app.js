@@ -20,13 +20,14 @@ app.use(cors());
 app.use(express.json());
 //reportes
 app.post("/createReport", createReport)
-app.post("/getAllReports", getAllReports)
+app.get("/getAllReports", getAllReports)
 app.get("/getUsers", getAllUsers)
 app.post("/register", registerUser)
 app.post("/login", logIn)
 //Buses
 app.post("/createBus", CreateBus)
-app.get("/getreportbus", getReportsByBus)
+app.get("/getReportsByBus/:number", getReportsByBus);
+
 
 
 app.listen(4000, () => {
