@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { registerUser, logIn, test, getAllUsers } from "./controllers/userController.js";
 import { createReport, getAllReports } from "./controllers/ReportController.js";
+import { CreateBus, getReportsByBus } from "./controllers/BusController.js";
 
 dotenv.config();
 mongoose.connect(process.env.urlbase)
@@ -23,6 +24,9 @@ app.post("/getAllReports", getAllReports)
 app.get("/getUsers", getAllUsers)
 app.post("/register", registerUser)
 app.post("/login", logIn)
+//Buses
+app.post("/createBus", CreateBus)
+app.get("/getreportbus", getReportsByBus)
 
 
 app.listen(4000, () => {
