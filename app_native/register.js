@@ -43,7 +43,7 @@ export const RegisterUser = () => {
 
     const onSubmit = async () => {
         try {
-            await axios.post('https://zv6c2klc-4000.usw3.devtunnels.ms/register', data);
+            await axios.post('https://9114-200-68-138-1.ngrok-free.app/register', data);
             Alert.alert('¡Éxito!', 'Registrado con éxito');
             navigation.navigate('Login');
         } catch (error) {
@@ -202,18 +202,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
     },
-    footer: {
-        alignItems: 'center',
-        verticalAlign: 'bottom',
-        marginTop: 10,
-    },
-    footerImage: {
-        width: '100%',
-        height: 500,
-        margin: "-200px",
-      
-        marginVertical:"-500px"
-    },
+    
     button: {
         backgroundColor: '#007BFF',
         padding: 15,

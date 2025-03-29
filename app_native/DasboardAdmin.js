@@ -6,11 +6,14 @@ import {
     FlatList,
     TouchableOpacity,
     Alert,
-    ScrollView,
+    ScrollView,Image
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export const AuthorizationPanel = () => {
     // Datos de ejemplo para la tabla
+      const navigation = useNavigation();
+    
     const data = [
         {
             id: '1',
@@ -74,8 +77,21 @@ export const AuthorizationPanel = () => {
     );
 
     return (
-        <ScrollView horizontal={true}>
-            <View style={styles.container}>
+        <ScrollView>
+            <View style={styles.navbar} >
+                        <Image source={require("./images/logo.png")} style={styles.logo}  ></Image>
+                           <TouchableOpacity onPress={() => navigation.navigate('Mechanic')}>
+                               <Text style={styles.navItem}>Mecanico</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity onPress={() => navigation.navigate('Operator')}>
+                               <Text style={styles.navItem}>Operador</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity onPress={() => navigation.navigate('modelo')}>
+                               <Text style={styles.navItem}>Modelo</Text>
+                           </TouchableOpacity>
+                </View>
+            <ScrollView horizontal={true}>
+            <View >
                 <Text style={styles.title}>Panel de Autorización</Text>
                 <View style={styles.tableHeader}>
                     <Text style={styles.headerCell}>#</Text>
@@ -92,6 +108,10 @@ export const AuthorizationPanel = () => {
                     keyExtractor={(item) => item.id}
                 />
             </View>
+            </ScrollView>
+            <View style={styles.footer}>
+                            <Image source={require("./images/foot.png")}></Image>
+                        </View>
         </ScrollView>
     );
 };
@@ -102,7 +122,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#f8f9fa',
         alignItems:"center",
         justifyContent:"center",
-        alignContent:"center"
+        alignContent:"center",
+        marginTop:20,
+        flexDirection:"column"
        
     },
     title: {
@@ -123,13 +145,15 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         color: '#333',
-        textAlign:"center"
+        textAlign:"center",
+        paddingHorizontal:-100
     },
     row: {
         flexDirection: 'row',
         paddingVertical: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        paddingHorizontal: -100
     },
     cell: {
         flex: 1,
@@ -164,4 +188,40 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 12,
     },
+    container: {
+        flex: 1,
+        backgroundColor: '#f8f8f8',
+    },
+    navbar: {
+        height: 50,
+        backgroundColor: '#572364',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginBottom:"100"
+    },
+    navItem: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    content: {
+        flex: 1,
+        padding: 20,
+    },
+    footer: {
+        height: 40,
+        backgroundColor: '#572364',
+        justifyContent: 'end',
+        alignItems: 'baseline',
+        marginTop :"300"   
+    },
+    footerText: {
+        color: '#fff',
+        fontSize: 14,
+    },
+    logo: {
+        width: 40,
+        height: 40,
+      },
 });

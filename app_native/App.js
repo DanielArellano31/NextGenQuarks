@@ -22,10 +22,10 @@ const App = () => {
   const onSubmit = async () => {
     try {
       data.rol = "operator";
-      const res = await axios.post("https://zv6c2klc-4000.usw3.devtunnels.ms/login", data);
+      const res = await axios.post("https://9114-200-68-138-1.ngrok-free.app/login", data);
       const user = res.data.user;
       user.logined = true;
-      navigation("Home")
+      navigation.navigate("DasboardAdmin")
 
       Alert.alert("¡BIENVENIDO!");
     } catch (error) {
@@ -73,9 +73,7 @@ const App = () => {
       <TouchableOpacity style={styles.button} onPress={onSubmit}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate("layout")}>
-        <Text style={styles.buttonText}>boton</Text>
-      </TouchableOpacity>
+
 
       {/* Register Link */}
       <Text style={styles.registerText}>
@@ -99,7 +97,7 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: ", 20, 20,20",
     backgroundColor: "#fff",
     
   },

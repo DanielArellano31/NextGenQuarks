@@ -1,7 +1,9 @@
 // MechanicView.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Table, Container, Form, Card, Button } from "react-bootstrap";
-import "./mechanic.css"
+import "./mechanic.css";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export const MechanicView = () => {
     const [statuses, setStatuses] = useState({});
@@ -46,14 +48,6 @@ export const MechanicView = () => {
         "Otros (Especificar)",
     ];
 
-    useEffect(() => {
-        const savedData = JSON.parse(localStorage.getItem("mechanicData")) || {};
-        setUnitNumber(savedData.unitNumber || "");
-        setStatuses(savedData.statuses || {});
-        setObservations(savedData.observations || {});
-        setSNumber(savedData.sNumber || "")
-    }, []);
-
     const handleSaveData = () => {
         const data = {
             unitNumber,
@@ -61,7 +55,7 @@ export const MechanicView = () => {
             sNumber,
             observations,
         };
-        localStorage.setItem("mechanicData", JSON.stringify(data));
+       AsyncStorage.setItem("mechanicData", JSON.stringify(data));
     };
 
 
